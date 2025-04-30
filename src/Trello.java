@@ -9,6 +9,9 @@ public class Trello
             this.tweet = tweet;
             this.time = time;
         }
+        public String toString() {
+            return "Tweet: \"" + tweet + "\", Time: " + time;
+        }
     }
 
     Map<Integer, List<Tweet>> tweetsMap = new HashMap<>(); // stores the tweets posted by user , key as userId
