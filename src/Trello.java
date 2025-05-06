@@ -2,26 +2,15 @@ import java.util.*;
 
 public class Trello
 {
-    public static class Tweet{
-        String tweet;
-        int time;
-        Tweet(String tweet, int time){
-            this.tweet = tweet;
-            this.time = time;
-        }
-        public String toString() {
-            return "Tweet: \"" + tweet + "\", Time: " + time;
-        }
-    }
 
-    Map<Integer, List<Tweet>> tweetsMap = new HashMap<>(); // stores the tweets posted by user , key as userId
+    LinkedList list = new LinkedList();
+
     Map<Integer, Set<Integer>> followersMap = new HashMap<>(); // stores the followers
-    int timestamp = 0;
+    int timecalculation = 1;
 
     public void postTweetFunction (int userId, String tweet){ // post  tweet using the userId with timestamp included
         if(Objects.equals(tweet, " ")) return ;
-        tweetsMap.putIfAbsent(userId, new ArrayList<>());
-        tweetsMap.get(userId).add(new Tweet(tweet,timestamp++));
+        list.buildList(userId,tweet,timecalculation++);
     }
 
     public void followFunction (int followerId, int followingId){ // user can follow another user
@@ -36,7 +25,10 @@ public class Trello
         }
     }
 
-
-
-
+    public void displayPost(){
+        while (list.head != null) {
+            System.out.println(  "[userId :"+list.head.data+ ", " + list.head.tweet+", Tweet stampNo : "+ list.head.time +"]");
+            list.head = list.head.next;
+        }
+    }
 }
